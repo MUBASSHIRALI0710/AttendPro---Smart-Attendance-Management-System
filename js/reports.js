@@ -1,3 +1,18 @@
+// reports.js mein top pe add karo
+let students = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+    if (typeof window.loadStudentsFromCloud === 'function') {
+        await window.loadStudentsFromCloud();
+        students = window.students || [];
+    }
+    
+    loadMonthlyReport();
+    loadTopStudents();
+    loadLowAttendance();
+    loadChart();
+    loadSummaryStats();
+});
 // reports.js - Professional Reports Module
 
 let students = JSON.parse(localStorage.getItem("students")) || [];
