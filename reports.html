@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fa-solid fa-user-check"></i> AttendPro</h2>
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="students.html">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="attendance.html">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Navbar -->
+            <div class="navbar">
+                <h3><i class="fa-solid fa-chart-pie"></i> Analytics & Reports</h3>
+                <div class="user" onclick="logout()">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="dashboard">
+                <div class="scard total">
+                    <i class="fa-solid fa-users icon"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudentsStat">0</p>
+                </div>
+                <div class="scard present">
+                    <i class="fa-solid fa-calendar-week icon"></i>
+                    <h3>Total Classes</h3>
+                    <p id="totalClassesStat">0</p>
+                </div>
+                <div class="scard">
+                    <i class="fa-solid fa-chart-line icon"></i>
+                    <h3>Avg Attendance</h3>
+                    <p id="avgAttendanceStat">0%</p>
+                </div>
+                <div class="scard">
+                    <i class="fa-solid fa-trophy icon"></i>
+                    <h3>High Performers</h3>
+                    <p id="highAttendanceStat">0</p>
+                </div>
+            </div>
+
+            <!-- Reports Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; padding: 0 32px 32px 32px;">
+                <!-- Monthly Report Card -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-table"></i> Student Attendance Summary</h3>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Attendance</th>
+                                    <th>Classes</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="monthlyReport"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Students Card -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-trophy"></i> Top Performers</h3>
+                    <ul id="topStudents" style="list-style: none; padding: 0;"></ul>
+                </div>
+
+                <!-- Low Attendance Alert Card -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Low Attendance Alert</h3>
+                    <ul id="lowAttendance" style="list-style: none; padding: 0;"></ul>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-chart-bar"></i> Attendance Overview</h3>
+                    <canvas id="reportChart" style="max-height: 300px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Export Button -->
+            <div style="padding: 0 32px 32px 32px;">
+                <button onclick="exportReport()" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #4361ee, #3a56d4);">
+                    <i class="fa-solid fa-download"></i> Export Complete Report (CSV)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/reports.js"></script>
+</body>
+
+</html>

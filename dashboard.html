@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fa-solid fa-user-check"></i> AttendPro</h2>
+            <ul>
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="students.html">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="attendance.html">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Navbar -->
+            <div class="navbar">
+                <h3><i class="fa-solid fa-chart-line"></i> Dashboard Overview</h3>
+                <div class="user" onclick="logout()">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span id="teacherName">Admin</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard">
+                <div class="scard total">
+                    <i class="fa-solid fa-users icon"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="scard present">
+                    <i class="fa-solid fa-user-check icon"></i>
+                    <h3>Present Today</h3>
+                    <p id="presentCount">0</p>
+                </div>
+                <div class="scard absent">
+                    <i class="fa-solid fa-user-xmark icon"></i>
+                    <h3>Absent Today</h3>
+                    <p id="absentCount">0</p>
+                </div>
+                <div class="scard">
+                    <i class="fa-solid fa-chart-line icon"></i>
+                    <h3>Attendance Rate</h3>
+                    <p id="attendancePercent">0%</p>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="chartBox">
+                <h3><i class="fa-solid fa-chart-pie"></i> Today's Attendance Analytics</h3>
+                <canvas id="attendanceChart"></canvas>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card" style="margin: 0 32px 32px 32px;">
+                <h3><i class="fa-solid fa-bolt"></i> Quick Actions</h3>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <button onclick="window.location.href='attendance.html'" class="btn-primary">
+                        <i class="fa-solid fa-calendar-check"></i> Mark Attendance
+                    </button>
+                    <button onclick="window.location.href='students.html'" class="btn-secondary">
+                        <i class="fa-solid fa-user-plus"></i> Add Student
+                    </button>
+                    <button onclick="window.location.href='reports.html'" class="btn-info">
+                        <i class="fa-solid fa-chart-line"></i> View Reports
+                    </button>
+                    <button onclick="exportTodayReport()" class="btn-success">
+                        <i class="fa-solid fa-download"></i> Export Today's Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

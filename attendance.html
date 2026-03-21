@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fa-solid fa-user-check"></i> AttendPro</h2>
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="students.html">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="attendance.html">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Navbar -->
+            <div class="navbar">
+                <h3><i class="fa-solid fa-calendar-check"></i> Attendance Management</h3>
+                <div class="user" onclick="logout()">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard">
+                <div class="scard total">
+                    <i class="fa-solid fa-users icon"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="scard present">
+                    <i class="fa-solid fa-user-check icon"></i>
+                    <h3>Present</h3>
+                    <p id="presentCount">0</p>
+                </div>
+                <div class="scard absent">
+                    <i class="fa-solid fa-user-xmark icon"></i>
+                    <h3>Absent</h3>
+                    <p id="absentCount">0</p>
+                </div>
+            </div>
+
+            <!-- Attendance Controls -->
+            <div class="content-column">
+                <div class="card">
+                    <h3><i class="fa-solid fa-calendar-day"></i> Attendance Controls</h3>
+                    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                        <div style="flex: 1;">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; color: #666;">Select Date</label>
+                            <input type="date" id="attendanceDate" style="width: 100%;" onchange="handleDateChange()">
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button onclick="markAllPresent()" class="btn-success" style="background: #2ecc71;">
+                                <i class="fa-solid fa-check-double"></i> Mark All Present
+                            </button>
+                            <button onclick="exportCSV()" class="btn-info">
+                                <i class="fa-solid fa-file-excel"></i> Export CSV
+                            </button>
+                            <button onclick="exportPDF()" class="btn-danger">
+                                <i class="fa-solid fa-file-pdf"></i> Export PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="search">
+                    <input type="text" id="search" placeholder="Search by name or roll number..." onkeyup="searchStudent()">
+                </div>
+
+                <!-- Chart -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Today's Attendance Overview</h3>
+                    <canvas id="attendanceChart" style="max-height: 250px;"></canvas>
+                </div>
+
+                <!-- Student Table -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-table-list"></i> Student Attendance List</h3>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Roll Number</th>
+                                    <th>Attendance %</th>
+                                    <th>Today's Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/students.js"></script>
+</body>
+
+</html>

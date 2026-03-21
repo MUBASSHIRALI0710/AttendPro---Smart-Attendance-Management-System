@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fa-solid fa-user-check"></i> AttendPro</h2>
+            <ul>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="students.html">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="attendance.html">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Attendance</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Navbar -->
+            <div class="navbar">
+                <h3><i class="fa-solid fa-users"></i> Student Management</h3>
+                <div class="user" onclick="logout()">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Admin</span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="dashboard">
+                <div class="scard total">
+                    <i class="fa-solid fa-users icon"></i>
+                    <h3>Total Students</h3>
+                    <p id="totalStudents">0</p>
+                </div>
+                <div class="scard present">
+                    <i class="fa-solid fa-user-check icon"></i>
+                    <h3>Present Today</h3>
+                    <p id="presentCount">0</p>
+                </div>
+                <div class="scard absent">
+                    <i class="fa-solid fa-user-xmark icon"></i>
+                    <h3>Absent Today</h3>
+                    <p id="absentCount">0</p>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content-column">
+                <!-- Add Student Form -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-user-plus"></i> Add New Student</h3>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <input type="text" id="name" placeholder="Student Full Name" style="flex: 2;">
+                        <input type="number" id="roll" placeholder="Roll Number" style="flex: 1;">
+                        <button onclick="addStudent()" style="background: #2ecc71;">
+                            <i class="fa-solid fa-plus"></i> Add Student
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div class="search">
+                    <input type="text" id="search" placeholder="Search students by name or roll number..." onkeyup="searchStudent()">
+                </div>
+
+                <!-- Student Table -->
+                <div class="card">
+                    <h3><i class="fa-solid fa-table-list"></i> Student Directory</h3>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Roll Number</th>
+                                    <th>Attendance %</th>
+                                    <th>Today's Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentList"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/students.js"></script>
+</body>
+
+</html>

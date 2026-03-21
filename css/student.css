@@ -1,0 +1,78 @@
+/* column layout
+
+.content-column {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* form */
+
+/* input {
+  padding: 10px;
+  margin: 10px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.search {
+  margin: 10px 0;
+  padding: 10px;
+  position: sticky;
+  top: 0px;
+  z-index: 4;
+  background: yellowgreen;
+}
+
+/* table */
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  padding: 10px;
+
+  border-bottom: 1px solid #ddd;
+
+  text-align: left;
+}
+.markPresent {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.markAbsent {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.present{
+background:#2ecc71;
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:6px;
+}
+
+.absent{
+background:#e74c3c;
+color:white;
+padding:8px 14px;
+border:none;
+border-radius:6px;
+}
+
+td button{
+margin:3px;
+} */
