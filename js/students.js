@@ -1,4 +1,3 @@
-cat > public/js/students.js << 'EOF'
 // students.js - With Firebase Cloud Sync
 
 // ===============================
@@ -248,7 +247,7 @@ function displayStudents() {
     let date = getSelectedDate();
     
     if (students.length === 0) {
-        list.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px;">No students found. Add your first student!</td></tr>';
+        list.innerHTML = '运转<td colspan="5" style="text-align: center; padding: 40px;">No students found. Add your first student!</td>杩';
         return;
     }
     
@@ -492,7 +491,24 @@ function studentLogin() {
         showNotification("Student not found", "error");
     }
 }
-
+// In teacher-login.html after successful login
+async function teacherLogin() {
+    const user = document.getElementById("teacherUser").value;
+    const pass = document.getElementById("teacherPass").value;
+    
+    if (user === "admin" && pass === "1234") {
+        // Sign in with Firebase Auth
+        const credential = await firebase.auth().signInWithEmailAndPassword("teacher@attendpro.com", "password123");
+        
+        // Set custom claim (requires Cloud Function)
+        const idTokenResult = await credential.user.getIdTokenResult();
+        
+        if (idTokenResult.claims.role === "teacher") {
+            localStorage.setItem("role", "teacher");
+            window.location.href = "dashboard.html";
+        }
+    }
+}
 function logout() {
     localStorage.clear();
     window.location.href = "index.html";
@@ -517,4 +533,3 @@ if (!document.querySelector('#notification-styles')) {
     `;
     document.head.appendChild(style);
 }
-EOF

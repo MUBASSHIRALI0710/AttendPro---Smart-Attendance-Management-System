@@ -1,19 +1,24 @@
-cat > public/js/firebase-config.js << 'EOF'
 // Firebase Configuration for AttendPro
 const firebaseConfig = {
-  apiKey: "AIzaSyB9ZiveeqG6qwSXyqX7UZThNyaH9agFdBs",
-  authDomain: "attendpro-e7706.firebaseapp.com",
-  projectId: "attendpro-e7706",
-  storageBucket: "attendpro-e7706.firebasestorage.app",
-  messagingSenderId: "52026174828",
-  appId: "1:52026174828:web:f083ae57cc570b78e05749",
-  measurementId: "G-PMLTWV1NLB"
+    apiKey: "AIzaSyB9ZiveeqG6qwSXyqX7UZThNyaH9agFdBs",
+    authDomain: "attendpro-e7706.firebaseapp.com",
+    projectId: "attendpro-e7706",
+    storageBucket: "attendpro-e7706.firebasestorage.app",
+    messagingSenderId: "52026174828",
+    appId: "1:52026174828:web:f083ae57cc570b78e05749"
 };
-
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
+// Enable offline persistence
+db.enablePersistence().catch((err) => {
+    console.warn("Offline persistence error:", err);
+});
+
+// Global students array
+window.students = [];
 
 // Load students from cloud
 window.loadStudentsFromCloud = async function() {
@@ -23,10 +28,11 @@ window.loadStudentsFromCloud = async function() {
         snapshot.forEach(doc => {
             window.students.push({ id: doc.id, ...doc.data() });
         });
-        console.log('Loaded', window.students.length, 'students');
+        window.students.sort((a, b) => Number(a.roll) - Number(b.roll));
+        console.log('✅ Loaded', window.students.length, 'students from cloud');
         return true;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('❌ Error loading:', error);
         return false;
     }
 };
@@ -44,19 +50,21 @@ window.saveStudentsToCloud = async function() {
                 name: student.name,
                 roll: student.roll,
                 attendance: student.attendance || {},
-                enrollmentDate: student.enrollmentDate || new Date().toISOString()
+                enrollmentDate: student.enrollmentDate || new Date().toISOString(),
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
-        console.log('Saved to cloud');
+        console.log('✅ Saved', window.students.length, 'students to cloud');
         return true;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('❌ Error saving:', error);
         return false;
     }
 };
 
-// Load on page load
+// Auto-load on page load
 document.addEventListener('DOMContentLoaded', () => {
     window.loadStudentsFromCloud();
 });
-EOF
+
+console.log('🔥 Firebase configured!');
