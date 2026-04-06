@@ -63,7 +63,7 @@ async function loadStudentsForAttendance() {
     document.getElementById('attendanceCard').style.display = 'block';
     
     const { data: existing } = await window.supabase
-        .from('attendance')
+        .from('attendance_new')
         .select('student_id, status')
         .eq('subject_id', currentSubjectId)
         .eq('date', today);
@@ -96,11 +96,11 @@ async function saveAttendance() {
     for (let sel of selects) {
         const studentId = parseInt(sel.dataset.student);
         const status = sel.value;
-        await window.supabase.from('attendance').delete()
+        await window.supabase.from('attendance_new').delete()
             .eq('student_id', studentId)
             .eq('subject_id', currentSubjectId)
             .eq('date', today);
-        await window.supabase.from('attendance').insert([{
+        await window.supabase.from('attendance_new').insert([{
             student_id: studentId,
             class_id: currentClassId,
             subject_id: currentSubjectId,
@@ -114,7 +114,7 @@ async function saveAttendance() {
 
 async function showReport() {
     const { data } = await window.supabase
-        .from('attendance')
+        .from('attendance_new')
         .select('*, students(name, roll)')
         .eq('class_id', currentClassId)
         .eq('subject_id', currentSubjectId);
