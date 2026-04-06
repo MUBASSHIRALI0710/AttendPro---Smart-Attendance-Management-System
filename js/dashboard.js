@@ -1,30 +1,30 @@
 // dashboard.js mein top pe add karo
-let students = [];
+let student = [];
 
 // Load data from Firebase
 document.addEventListener('DOMContentLoaded', async () => {
-    if (typeof window.loadStudentsFromCloud === 'function') {
-        await window.loadStudentsFromCloud();
-        students = window.students || [];
-    }
-    
-    loadDashboard();
-    createChart();
+  if (typeof window.loadStudentsFromCloud === 'function') {
+    await window.loadStudentsFromCloud();
+    students = window.students || [];
+  }
+
+  loadDashboard();
+  createChart();
 });
 
 function loadDashboard() {
-    let total = students.length;
-    let today = new Date().toISOString().split("T")[0];
-    let present = students.filter(s => s.attendance && s.attendance[today] === "Present").length;
-    let absent = total - present;
-    let percent = total === 0 ? 0 : Math.round((present / total) * 100);
-    
-    // Update UI...
-    if (document.getElementById("totalStudents")) {
-        document.getElementById("totalStudents").innerText = total;
-        document.getElementById("absentCount").innerText = absent;
-        document.getElementById("attendancePercent").innerText = percent + "%";
-    }
+  let total = students.length;
+  let today = new Date().toISOString().split("T")[0];
+  let present = students.filter(s => s.attendance && s.attendance[today] === "Present").length;
+  let absent = total - present;
+  let percent = total === 0 ? 0 : Math.round((present / total) * 100);
+
+  // Update UI...
+  if (document.getElementById("totalStudents")) {
+    document.getElementById("totalStudents").innerText = total;
+    document.getElementById("absentCount").innerText = absent;
+    document.getElementById("attendancePercent").innerText = percent + "%";
+  }
 }
 // ======================
 // ROLE SECURITY

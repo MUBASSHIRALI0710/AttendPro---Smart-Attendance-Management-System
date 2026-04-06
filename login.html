@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .login-container { max-width: 400px; margin: 100px auto; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        input, button { width: 100%; margin: 10px 0; padding: 12px; border-radius: 8px; border: 1px solid #ddd; }
+        button { background: #4361ee; color: white; border: none; cursor: pointer; }
+        button:hover { background: #3a56d4; }
+        .role-badge { text-align: center; margin-top: 15px; font-size: 12px; color: #666; }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #667eea, #764ba2); min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div class="login-container">
+        <h2 style="text-align: center;"><i class="fa-solid fa-user-check"></i> AttendPro Login</h2>
+        <input type="email" id="email" placeholder="Email" autocomplete="email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="handleLogin()">Login</button>
+        <p id="errorMsg" style="color:red; margin-top:10px; text-align:center;"></p>
+        <div class="role-badge">
+            <i class="fa-solid fa-info-circle"></i> Demo: admin@school.com / admin123
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script>
+        async function handleLogin() {
+    // TEMPORARY BYPASS - SIRF TESTING KE LIYE
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    if (email === 'admin@school.com' && password === 'admin123') {
+        localStorage.setItem('role', 'admin');
+        localStorage.setItem('teacherName', 'Admin');
+        window.location.href = 'admin-dashboard.html';
+        return;
+    }
+    
+    // Original code neeche...
+    const errorMsg = document.getElementById('errorMsg');
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) { errorMsg.innerText = error.message; return; }
+        const user = await getCurrentUser();
+        if (user.role === 'admin') window.location.href = 'admin-dashboard.html';
+        else if (user.role === 'teacher') window.location.href = 'teacher-dashboard.html';
+        else window.location.href = 'student-dashboard.html';
+    } catch (err) {
+        errorMsg.innerText = 'Login failed: ' + err.message;
+    }
+}
+    </script>
+</body>
+</html>

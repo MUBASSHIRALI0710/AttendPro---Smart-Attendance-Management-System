@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - AttendPro</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -38,6 +40,12 @@
                     <a href="reports.html">
                         <i class="fa-solid fa-chart-pie"></i>
                         <span>Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Analytics</span>
                     </a>
                 </li>
             </ul>
@@ -82,7 +90,7 @@
             <!-- Charts Section -->
             <div class="chartBox">
                 <h3><i class="fa-solid fa-chart-pie"></i> Today's Attendance Analytics</h3>
-                <canvas id="attendanceChart"></canvas>
+                <canvas id="attendanceChart" style="max-height: 300px;"></canvas>
             </div>
 
             <!-- Quick Actions -->
@@ -106,10 +114,10 @@
         </div>
     </div>
 
-        <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="js/firebase-config.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
     <script src="js/students.js"></script>
 </body>
+
 </html>

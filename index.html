@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AttendPro - Smart Attendance System</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <style>
         * {
             margin: 0;
@@ -41,7 +43,7 @@
 
         .tagline {
             font-size: 1.2rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 48px;
         }
 
@@ -64,7 +66,7 @@
 
         .login-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .login-card i {
@@ -101,8 +103,14 @@
         }
 
         @media (max-width: 640px) {
-            h1 { font-size: 2rem; }
-            .login-card { width: 260px; padding: 30px; }
+            h1 {
+                font-size: 2rem;
+            }
+
+            .login-card {
+                width: 260px;
+                padding: 30px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -115,7 +123,7 @@
         </div>
         <h1>AttendPro</h1>
         <p class="tagline">Smart Attendance Management System</p>
-        
+
         <div class="login-options">
             <div class="login-card" onclick="window.location.href='teacher-login.html'">
                 <i class="fa-solid fa-chalkboard-user"></i>
@@ -123,7 +131,7 @@
                 <p>Mark attendance, manage students, and generate reports</p>
                 <span class="btn">Login as Teacher</span>
             </div>
-            
+
             <div class="login-card" onclick="window.location.href='student-login.html'">
                 <i class="fa-solid fa-user-graduate"></i>
                 <h3>Student Portal</h3>
@@ -132,11 +140,10 @@
             </div>
         </div>
     </div>
-    <!-- Firebase SDKs -->
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="js/firebase-config.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
     <script src="js/students.js"></script>
 </body>
+
 </html>

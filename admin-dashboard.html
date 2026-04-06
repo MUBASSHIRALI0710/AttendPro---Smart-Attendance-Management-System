@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard - AttendPro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { padding: 10px 20px; background: #e0e0e0; border: none; cursor: pointer; }
+        .tab-btn.active { background: #4361ee; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .form-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; flex-wrap: wrap; }
+        .list-item { padding: 8px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar"><h2>AttendPro</h2><ul><li class="active"><a href="#">Admin</a></li><li><a href="#" onclick="logout()">Logout</a></li></ul></div>
+    <div class="main">
+        <div class="navbar"><h3>Admin Dashboard</h3><div class="user" onclick="logout()"><i class="fa-solid fa-user-circle"></i><span>Admin</span></div></div>
+        <div class="content-column">
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('classes')">Classes</button>
+                <button class="tab-btn" onclick="showTab('subjects')">Subjects</button>
+                <button class="tab-btn" onclick="showTab('teachers')">Teachers</button>
+                <button class="tab-btn" onclick="showTab('students')">Students</button>
+                <button class="tab-btn" onclick="showTab('assign')">Assign Subject to Class & Teacher</button>
+            </div>
+
+            <!-- Classes Tab -->
+            <div id="classesTab" class="tab-content active">
+                <div class="form-row"><input type="text" id="className" placeholder="Class Name (e.g., 10th)"><input type="text" id="classSection" placeholder="Section (e.g., A)"><button onclick="createClass()">Add Class</button></div>
+                <div id="classList"></div>
+            </div>
+
+            <!-- Subjects Tab -->
+            <div id="subjectsTab" class="tab-content">
+                <div class="form-row"><input type="text" id="subjectName" placeholder="Subject Name"><button onclick="createSubject()">Add Subject</button></div>
+                <div id="subjectList"></div>
+            </div>
+
+            <!-- Teachers Tab -->
+            <div id="teachersTab" class="tab-content">
+                <div class="form-row"><input type="email" id="teacherEmail" placeholder="Teacher Email"><input type="text" id="teacherName" placeholder="Full Name"><input type="password" id="teacherPass" placeholder="Password"><button onclick="createTeacher()">Add Teacher</button></div>
+                <div id="teacherList"></div>
+            </div>
+
+            <!-- Students Tab -->
+            <div id="studentsTab" class="tab-content">
+                <div class="form-row">
+                    <select id="studentClass"></select>
+                    <input type="text" id="studentRoll" placeholder="Roll Number">
+                    <input type="text" id="studentName" placeholder="Student Name">
+                    <input type="email" id="studentEmail" placeholder="Email">
+                    <input type="password" id="studentPass" placeholder="Password">
+                    <button onclick="createStudent()">Add Student</button>
+                </div>
+                <div id="studentList"></div>
+            </div>
+
+            <!-- Assign Subject to Class & Teacher -->
+            <div id="assignTab" class="tab-content">
+                <div class="form-row">
+                    <select id="assignClass"></select>
+                    <select id="assignSubject"></select>
+                    <select id="assignTeacher"></select>
+                    <button onclick="assignSubjectToClass()">Assign</button>
+                </div>
+                <div id="assignList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Teacher Dashboard - AttendPro</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></head>
+<body>
+<div class="container">
+    <div class="sidebar"><h2>AttendPro</h2><ul><li class="active"><a href="#">Teacher</a></li><li><a href="#" onclick="logout()">Logout</a></li></ul></div>
+    <div class="main">
+        <div class="navbar"><h3>Teacher Dashboard</h3><div class="user" onclick="logout()"><i class="fa-solid fa-user-circle"></i><span>Teacher</span></div></div>
+        <div class="content-column">
+            <div class="card">
+                <h3>Select Class & Subject</h3>
+                <select id="classSelect" onchange="loadSubjectsForClass()"><option>Loading classes...</option></select>
+                <select id="subjectSelect" onchange="loadStudentsForAttendance()"><option>Select subject first</option></select>
+            </div>
+            <div class="card" id="attendanceCard" style="display:none;">
+                <h3>Mark Attendance for <span id="attDate"></span></h3>
+                <div id="attendanceTable"></div>
+                <button onclick="saveAttendance()" class="btn-success">Save Attendance</button>
+            </div>
+            <div class="card">
+                <h3>Class Reports</h3>
+                <button onclick="showReport()">View Attendance Report</button>
+                <div id="reportContainer"></div>
+            </div>
+            <div class="card">
+                <h3>Analytics</h3>
+                <button onclick="showAnalytics()">Show Analytics</button>
+                <canvas id="analyticsChart" style="max-height:300px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/teacher.js"></script>
+</body>
+</html>
