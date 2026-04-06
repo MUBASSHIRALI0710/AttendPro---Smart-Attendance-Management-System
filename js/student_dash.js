@@ -1,5 +1,17 @@
 let currentStudent = null;
 
+// Add at top of student_dash.js
+if (!localStorage.getItem('role') || localStorage.getItem('role') !== 'student') {
+    // Fallback to localStorage roll
+    const roll = localStorage.getItem('studentRoll');
+    if (roll) {
+        // Create a fake user for compatibility
+        window.getCurrentUser = async () => {
+            return { id: 'student-id', email: 'student@school.com', role: 'student', name: 'Student' };
+        };
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const user = await getCurrentUser();
     if (!user || user.role !== 'student') {

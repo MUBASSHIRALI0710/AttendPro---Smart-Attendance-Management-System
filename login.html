@@ -28,29 +28,43 @@
     <script src="js/supabase-config.js"></script>
     <script>
         async function handleLogin() {
-    // TEMPORARY BYPASS - SIRF TESTING KE LIYE
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('errorMsg');
     
+    if (!email || !password) {
+        errorMsg.innerText = 'Please enter email and password';
+        return;
+    }
+    
+    // HARDCODED LOGIN
     if (email === 'admin@school.com' && password === 'admin123') {
         localStorage.setItem('role', 'admin');
-        localStorage.setItem('teacherName', 'Admin');
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', 'Admin');
         window.location.href = 'admin-dashboard.html';
         return;
     }
     
-    // Original code neeche...
-    const errorMsg = document.getElementById('errorMsg');
-    try {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) { errorMsg.innerText = error.message; return; }
-        const user = await getCurrentUser();
-        if (user.role === 'admin') window.location.href = 'admin-dashboard.html';
-        else if (user.role === 'teacher') window.location.href = 'teacher-dashboard.html';
-        else window.location.href = 'student-dashboard.html';
-    } catch (err) {
-        errorMsg.innerText = 'Login failed: ' + err.message;
+    if (email === 'teacher@school.com' && password === 'teacher123') {
+        localStorage.setItem('role', 'teacher');
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', 'Teacher');
+        window.location.href = 'teacher-dashboard.html';
+        return;
     }
+    
+    // ✅ ADD STUDENT LOGIN
+    if (email === 'student@school.com' && password === 'student123') {
+        localStorage.setItem('role', 'student');
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userName', 'Student');
+        localStorage.setItem('studentRoll', '1');  // Roll number
+        window.location.href = 'student-dashboard.html';
+        return;
+    }
+    
+    errorMsg.innerText = 'Invalid credentials! Use: admin@school.com/admin123, teacher@school.com/teacher123, or student@school.com/student123';
 }
     </script>
 </body>
